@@ -1,4 +1,9 @@
 <?php
+
+include("./clases/usuari.php");
+include("./clases/bibliotecari.php");
+
+
 $usuari = "usuaris.csv";
 $bibliotecari = "bibliotecaris.csv";
 
@@ -8,10 +13,11 @@ if (empty($_POST["usuari"]) || empty($_POST["password"])) {
 
 if (($gestor = fopen("$usuari", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-        if ($datos[0] == $_POST["usuari"]  && $datos[1] == $_POST["password"]) {
-            session_name($_POST["usuari"]);
+        if ($datos[4] == $_POST["usuari"]  && $datos[5] == $_POST["password"]) {
+            session_name(strval($_POST["usuari"]));
             session_start();
-            $_SESSION["tipus"] = "usuari";
+            //$_SESSION["tipus"] = "usuari";
+            $_SESSION["usuari"] = new Usuari($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8]);
             break;
         }
     }
@@ -19,10 +25,11 @@ if (($gestor = fopen("$usuari", "r")) !== FALSE) {
 }
 if (($gestor = fopen("$bibliotecari", "r")) !== FALSE) {
     while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-        if ($datos[0] == $_POST["usuari"]  && $datos[1] == $_POST["password"]) {
+        if ($datos[4] == $_POST["usuari"]  && $datos[5] == $_POST["password"]) {
             session_name($_POST["usuari"]);
             session_start();
-            $_SESSION["tipus"] = "bibliotecari";
+            //$_SESSION["tipus"] = "bibliotecari";
+            $_SESSION["usuari"] = new Bibliotecari($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7],$datos[8],$datos[9]);
             break;
         }
     }
@@ -45,12 +52,12 @@ if (($gestor = fopen("$bibliotecari", "r")) !== FALSE) {
     echo "Sessió de l'usuari: " . session_name() . "<br>";
     echo "</div>";
 
-    switch ($_SESSION["tipus"]) {
-        case 'usuari':
+    switch ($_SESSION["usuari"]->nom_de_clase()) {
+        case 'Usuari':
             readfile("exemple1.html");
             break;
 
-        case 'bibliotecari':
+        case 'Bibliotecari':
             readfile("exemple2.html");
             break;
 
