@@ -1,11 +1,8 @@
 <?php
-class Bibliotecari{
-    private $nomcognoms;
-    private $adreca;
-    private $correu;
-    private $tel;
-    private $id;
-    private $password;
+
+include_once 'persona.php';
+class Bibliotecari extends Persona{
+
     private $ssocial;
     private $primerdia;
     private $salari;
@@ -24,8 +21,12 @@ class Bibliotecari{
         $this->cap = $cap;
     }
             
-    public function nom_de_clase(){
+    /*public function nom_de_clase(){
         return get_class($this);
-    } 
+    } */
+
+    public function agregar_libro(){
+        
+    }
 }
 ?>
