@@ -24,5 +24,44 @@ class Usuari extends Persona{
     public function nom_de_clase(){
         return get_class($this);
     } */
+    public function mostrar_info(){
+
+        return "<tr>
+            <th>Nom d'usuari</th>
+            <td>{$this->nomcognoms}</td>
+        </tr>
+        <tr>
+            <th>Adreça</th>
+            <td>{$this->adreca}</td>
+        </tr>
+        <tr>
+            <th>Correu</th>
+            <td>{$this->correu}</td>
+        </tr>
+        <tr>
+            <th>Telèfon</th>
+            <td>{$this->tel}</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <td>{$this->id}</td>
+        </tr>
+        <tr>
+            <th>Contrasenya</th>
+            <td>{$this->password}</td>
+        </tr>
+        <tr>
+            <th>Estat del llibre en prestec</th>
+            <td>{$this->llibre_prestec_estat}</td>
+        </tr>
+        <tr>
+            <th>Data inici del prestec</th>
+            <td>{$this->data_inici_prestec}</td>
+        </tr>
+        <tr>
+            <th>ISBN del llibre en prestec</th>
+            <td>{$this->isbn_libre_presctec}</td>
+        </tr>";
+        
+    }
 }
-?>

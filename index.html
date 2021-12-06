@@ -7,14 +7,19 @@
 
 <body>
 	<form action="./inici.php" method="POST">
-		Usuari <input type="text" name="usuari"><br>
-		Contrasenya <input type="pass" name="password"><br>
+		Usuari <input type="text" id="usuari" name="usuari"><br>
+		Contrasenya <input type="pass" id="password" name="password"><br>
 		<label for="tipus_usuari">Tipus d'usuari:</label>
 		<select name="tipus_usuari" id="tipus_usuari">
 			<option value="tipus_estandard">Estandard</option>
 			<option value="tipus_bibliotecari">Bibliotecari</option>
 		  </select><br>
-		<input type="submit" value="Iniciar sessio">
+		<input type="submit" name="submit" value="Iniciar sessio">
 	</form>
 </body>
 </head>
+
+
+
+
+

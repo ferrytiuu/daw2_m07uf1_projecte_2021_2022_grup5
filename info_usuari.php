@@ -1,17 +1,17 @@
-
 <?php
-
 include_once './clases/usuari.php';
 include_once './clases/bibliotecari.php';
 
-session_start();
+session_start(); // always call this at top
+
 
 if(!isset($_SESSION["usuari"])){
     header('location:index.html');
     exit;
 }
+//echo session_id();
+//print_r ($_SESSION);
 ?>
-
 <html>
 
 <head>
@@ -20,6 +20,7 @@ if(!isset($_SESSION["usuari"])){
         Inici
     </title>
 </head>
+
 <body>
 <?php
     echo "<div id='sessio'>";
@@ -33,19 +34,28 @@ if(!isset($_SESSION["usuari"])){
             <input type="submit" value="Tanca la sessió">
         </form>
         </div>';
+?>
 
-    switch ($_SESSION["usuari"]->nom_de_clase()) {
+<form action="../inici.php" method="POST">
+    <input type="submit" value="Torna enrere">
+</form>
+<table border="2">
+
+<?php
+    switch ($_SESSION['usuari']->nom_de_clase()) {
         case 'Usuari':
-            readfile("usuari.html");
+            echo $_SESSION['usuari']->mostrar_info();
+            //var_dump($_COOKIE);
             break;
 
         case 'Bibliotecari':
-            readfile("bibliotecari.html");
+            readfile("menus_bibliotecari/bibliotecari.html");
             break;
 
         default:
-        
+
             break;
     }
     ?>
+</table>
 </body>

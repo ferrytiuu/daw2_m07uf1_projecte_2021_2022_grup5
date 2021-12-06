@@ -10,3 +10,9 @@ body{
     border-radius: 5px;
 
 }
+
+#boto_esborrar{
+    float:right;
+    border: 1px solid red;
+}
+

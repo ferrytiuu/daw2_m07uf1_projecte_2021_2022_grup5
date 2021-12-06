@@ -17,6 +17,9 @@ abstract class Persona
     public function nom_de_clase(){
         return get_class($this);
     } 
+    public function get_id(){
+        return $this->id;
+    }
     public function get_name(){
         return $this->nomcognoms;
     }
