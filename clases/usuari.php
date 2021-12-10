@@ -24,44 +24,39 @@ class Usuari extends Persona{
     public function nom_de_clase(){
         return get_class($this);
     } */
-    public function mostrar_info(){
-
-        return "<tr>
-            <th>Nom d'usuari</th>
+    public function mostrar_info($tipus_usuari){
+        return "
+        <tr>
             <td>{$this->nomcognoms}</td>
-        </tr>
-        <tr>
-            <th>Adreça</th>
             <td>{$this->adreca}</td>
-        </tr>
-        <tr>
-            <th>Correu</th>
             <td>{$this->correu}</td>
-        </tr>
-        <tr>
-            <th>Telèfon</th>
             <td>{$this->tel}</td>
-        </tr>
-        <tr>
-            <th>ID</th>
             <td>{$this->id}</td>
-        </tr>
-        <tr>
-            <th>Contrasenya</th>
             <td>{$this->password}</td>
-        </tr>
-        <tr>
-            <th>Estat del llibre en prestec</th>
             <td>{$this->llibre_prestec_estat}</td>
-        </tr>
-        <tr>
-            <th>Data inici del prestec</th>
             <td>{$this->data_inici_prestec}</td>
-        </tr>
-        <tr>
-            <th>ISBN del llibre en prestec</th>
             <td>{$this->isbn_libre_presctec}</td>
-        </tr>";
         
+            <td>
+                <form action='menus_bibliotecari/afegirmodificar_usuari.php' method='POST'>
+                    <input type='hidden' name='metodo' value='PUT'>
+                    <input type='hidden' name='nomcognoms' value='{$this->nomcognoms}'>
+                    <input type='hidden' name='correu' value='{$this->correu}'>
+                    <input type='hidden' name='tel' value='{$this->tel}'>
+                    <input type='hidden' name='id' value='{$this->id}'>
+                    <input type='hidden' name='password' value='{$this->password}'>
+                    <input type='hidden' name='llibre_prestec_estat' value='{$this->llibre_prestec_estat}'>
+                    <input type='hidden' name='data_inici_prestec' value='{$this->data_inici_prestec}'>
+                    <input type='hidden' name='isbn_libre_presctec' value='{$this->isbn_libre_presctec}'>
+                    <input type='submit' value='Modifica usuari'>
+                </form>
+                <form action='menus_bibliotecari/afegir_editar_eliminar_usuari.php' method='POST'>
+                    <input type='hidden' value='DEL' name='tipus'>
+                    <input type='hidden' name='id' value='{$this->id}'>
+                    <input type='submit' value='Elimina usuari'>
+                </form>
+            </td>
+        </tr>";
+
     }
 }

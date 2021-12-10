@@ -49,7 +49,7 @@ if(!isset($_SESSION["usuari"])){
             break;
 
         case 'Bibliotecari':
-            echo $_SESSON['usuari']->mostrar_info();
+            echo $_SESSION['usuari']->mostrar_info();
             break;
 
         default:
