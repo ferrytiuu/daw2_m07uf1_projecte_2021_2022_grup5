@@ -98,7 +98,6 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
         switch ($_SESSION['usuari']->nom_de_clase()) {
             case 'Usuari':
                 readfile("menus_usuari/usuari.html");
-                var_dump($_COOKIE);
                 exit();
                 break;
 

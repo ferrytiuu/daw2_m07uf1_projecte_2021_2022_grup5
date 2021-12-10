@@ -49,7 +49,7 @@ if(!isset($_SESSION["usuari"])){
             break;
 
         case 'Bibliotecari':
-            readfile("menus_bibliotecari/bibliotecari.html");
+            echo $_SESSON['usuari']->mostrar_info();
             break;
 
         default:

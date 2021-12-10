@@ -44,6 +44,20 @@ $llibres = "llibres.csv";
 <form action="../inici.php" method="POST">
     <input type="submit" value="Torna enrere">
 </form>
+
+<?php 
+
+if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari"){
+    echo "<p> <form action='/menus_bibliotecari/afegirmodificar_llibre.php' method='POST'>
+            <input type='hidden' name='metodo' value='POST'>
+            <input type='submit' value='Afegir llibre' />
+            </form>
+        </<p>";
+}
+
+
+?>
+
 <table border="2">
     <tr>
         <th>Titol</th>
@@ -58,8 +72,7 @@ $llibres = "llibres.csv";
             $llibres = array();
             while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
                 $llibre = new Llibre ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5]);
-                echo $llibre->mostrar_info();
-                
+                echo $llibre->mostrar_info($_SESSION['usuari']->nom_de_clase());
             }
             fclose($gestor);
         }
