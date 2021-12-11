@@ -106,7 +106,6 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
                 break;
 
             default:
-
                 break;
         }
     }

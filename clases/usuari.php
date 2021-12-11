@@ -41,13 +41,11 @@ class Usuari extends Persona{
                 <form action='menus_bibliotecari/afegirmodificar_usuari.php' method='POST'>
                     <input type='hidden' name='metodo' value='PUT'>
                     <input type='hidden' name='nomcognoms' value='{$this->nomcognoms}'>
+                    <input type='hidden' name='adreca' value='{$this->adreca}'>
                     <input type='hidden' name='correu' value='{$this->correu}'>
                     <input type='hidden' name='tel' value='{$this->tel}'>
                     <input type='hidden' name='id' value='{$this->id}'>
                     <input type='hidden' name='password' value='{$this->password}'>
-                    <input type='hidden' name='llibre_prestec_estat' value='{$this->llibre_prestec_estat}'>
-                    <input type='hidden' name='data_inici_prestec' value='{$this->data_inici_prestec}'>
-                    <input type='hidden' name='isbn_libre_presctec' value='{$this->isbn_libre_presctec}'>
                     <input type='submit' value='Modifica usuari'>
                 </form>
                 <form action='menus_bibliotecari/afegir_editar_eliminar_usuari.php' method='POST'>

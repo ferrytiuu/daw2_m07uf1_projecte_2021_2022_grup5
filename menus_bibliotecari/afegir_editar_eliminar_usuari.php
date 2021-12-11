@@ -47,8 +47,8 @@ function modificar_usuari($filename){
     if (($gestor = fopen("$filename", "r")) !== FALSE) {
         while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
             
-            if ($datos[4] == $_POST["id_anterior"]) {
-                $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$_POST["llibre_prestec_estat"],$_POST["data_inici_prestec"],$_POST["isbn_libre_presctec"]);
+            if ($datos[4] == $_POST["id_anterior"]  ) {
+                $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$datos[6],$datos[7],$datos[8]);
                 array_push($nuevo_csv,$linia);
                 //$datos=array($_POST["titol"],$_POST["autor"],$_POST["isbn"],$_POST["prestec"],$_POST["dataprestec"],$_POST["idusuari"]);
                 //eak;

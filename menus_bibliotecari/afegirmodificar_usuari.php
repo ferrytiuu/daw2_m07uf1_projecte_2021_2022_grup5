@@ -18,10 +18,7 @@
         $tel = isset($_POST["tel"]) ? "value='{$_POST["tel"]}'" : "";
         $id = isset($_POST["id"]) ? "value='{$_POST["id"]}'" : "";
         $password = isset($_POST["password"]) ? "value='{$_POST["password"]}'" : "";
-        $llibre_prestec_estat = isset($_POST["llibre_prestec_estat"]) ? "value='{$_POST["llibre_prestec_estat"]}'" : "";
-        $data_inici_prestec = isset($_POST["data_inici_prestec"]) ? "value='{$_POST["data_inici_prestec"]}'" : "";
-        $isbn_libre_presctec = isset($_POST["isbn_libre_presctec"]) ? "value='{$_POST["isbn_libre_presctec"]}'" : "";
-        if($_POST['metodo'] == "PUT") echo "<input type='hidden' value='{$_POST["titol"]}' name='id_anterior'>";
+        if($_POST['metodo'] == "PUT") echo "<input type='hidden' value='{$_POST["id"]}' name='id_anterior'>";
         echo "
        
         <input type='hidden' value='{$metodo}' name='tipus'>
@@ -39,14 +36,8 @@
         <input type='text' id='id' name='id' {$id}><br>
         <label for='password'>Contrasenya:</label>
         <input type='password' id='password' name='password' {$password}><br>
-        <label for='llibre_prestec_estat'>Llibre prestat?:</label>
-        <input type='text' id='llibre_prestec_estat' name='llibre_prestec_estat' {$llibre_prestec_estat} readonly><br>
-        <label for='data_inici_prestec'>Data inici del préstec:</label>
-        <input type='text' id='data_inici_prestec' name='data_inici_prestec' {$data_inici_prestec} readonly><br>
-        <label for='isbn_libre_presctec'>ISBN del llibre prestat:</label>
-        <input type='text' id='isbn_libre_presctec' name='isbn_libre_presctec' {$isbn_libre_presctec} readonly><br>
 
-        <input type='submit' value='Afegir'>";
+        <input type='submit' value='Desar'>";
         
         ?>
         

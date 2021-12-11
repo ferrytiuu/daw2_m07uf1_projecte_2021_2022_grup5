@@ -41,7 +41,6 @@ class Llibre{
                 <input type='hidden' name='autor' value='{$this->autor}'>
                 <input type='hidden' name='isbn' value='{$this->isbn}'>
                 <input type='hidden' name='prestec' value='{$this->prestec}'>
-                <input type='hidden' name='dataprestec' value='{$this->dataprestec}'>
                 <input type='hidden' name='idusuari' value='{$this->idusuari}'>
                 <input type='submit' value='Modifica llibre'>
             </form>
