@@ -19,11 +19,9 @@ class Llibre{
     }
             
     public function agregar_llibre(){
-        
     }
 
     public function mostrar_info($tipus_usuari){
-
 
         $cadena= "<tr>
             <td>{$this->titol}</td>
@@ -33,7 +31,7 @@ class Llibre{
             <td>{$this->dataprestec}</td>
             <td>{$this->idusuari}</td>";
 
-        if($tipus_usuari=="Bibliotecari"){
+        if($tipus_usuari=="Bibliotecari" or $tipus_usuari=="Bibliotecari_cap" ){
             $cadena.="<td>
             <form action='menus_bibliotecari/afegirmodificar_llibre.php' method='POST'>
                 <input type='hidden' name='metodo' value='PUT'>

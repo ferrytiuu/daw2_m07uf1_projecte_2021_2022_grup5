@@ -12,13 +12,18 @@ if(isset($_POST["tipus"])) $tipus = $_POST["tipus"];
 
 switch ($_POST["tipus"]) {
     case 'POST':
-        agregar_usuari($filename);
+        $archivo= isset($_POST["cap"]) ? "../bibliotecaris.csv" : $filename;
+        error_log("Hace un put ".$archivo,0);
+        agregar_usuari($archivo);
         break;
     case 'PUT':
-        modificar_usuari($filename);
+        $archivo= isset($_POST["cap"]) ? "../bibliotecaris.csv" : $filename;
+        error_log("Hace un put ".$archivo,0);
+        modificar_usuari($archivo);
         break;
     case 'DEL':
-        eliminar_usuari($filename);
+        $archivo= isset($_POST["cap"]) ? "../bibliotecaris.csv" : $filename;
+        eliminar_usuari($archivo);
         break;
     default:
         echo "No hi ha res executable";
@@ -34,10 +39,22 @@ function redirect($url) {
 
 function agregar_usuari($filename){
     $fitxer = fopen($filename,"a");
-    $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],0,0,0);
+    if(isset($_POST["cap"])){
+        $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$_POST["ssocial"],date("Y-m-d | h:i:sa"),$_POST["salari"],$_POST["cap"]);
+    }
+    else{
+        $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],0,0,0);
+    }
+    
     fputcsv($fitxer,$linia);
     fclose($fitxer);
-    header('location:../info_tots_usuaris.php');
+    if(isset($_POST["cap"])){
+        header('location:../info_tots_bibliotecaris.php');
+    }
+    else{
+        header('location:../info_tots_usuaris.php');
+    }
+    
     die();
 
 }
@@ -48,7 +65,16 @@ function modificar_usuari($filename){
         while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
             
             if ($datos[4] == $_POST["id_anterior"]  ) {
-                $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$datos[6],$datos[7],$datos[8]);
+
+                if(isset($_POST["cap"])){
+                    $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$_POST["ssocial"],$datos[7],$_POST["salari"],$_POST["cap"]);
+                }
+                else{
+                    $linia=array($_POST["nomcognoms"],$_POST["adreca"],$_POST["correu"],$_POST["tel"],$_POST["id"],$_POST["password"],$datos[6],$datos[7],$datos[8]);
+
+
+                }
+
                 array_push($nuevo_csv,$linia);
                 //$datos=array($_POST["titol"],$_POST["autor"],$_POST["isbn"],$_POST["prestec"],$_POST["dataprestec"],$_POST["idusuari"]);
                 //eak;
@@ -64,7 +90,12 @@ function modificar_usuari($filename){
         fputcsv($fitxer, $linea);
       }
     fclose($fitxer);
-    header('location:../info_tots_usuaris.php');
+    if(isset($_POST["cap"])){
+        header('location:../info_tots_bibliotecaris.php');
+    }
+    else{
+        header('location:../info_tots_usuaris.php');
+    }
     die();
 
     
@@ -92,7 +123,12 @@ function eliminar_usuari($filename){
         fputcsv($fitxer, $linea);
       }
     fclose($fitxer);
-    header('location:../info_tots_usuaris.php');
+    if(isset($_POST["cap"])){
+        header('location:../info_tots_bibliotecaris.php');
+    }
+    else{
+        header('location:../info_tots_usuaris.php');
+    }
     die();
     
 }

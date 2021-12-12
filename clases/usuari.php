@@ -23,10 +23,10 @@ class Usuari extends Persona{
     /*
     public function nom_de_clase(){
         return get_class($this);
-    } */
+    }*/
     public function mostrar_info($tipus_usuari){
-        return "
-        <tr>
+        
+        $cadena= "<tr>
             <td>{$this->nomcognoms}</td>
             <td>{$this->adreca}</td>
             <td>{$this->correu}</td>
@@ -35,9 +35,10 @@ class Usuari extends Persona{
             <td>{$this->password}</td>
             <td>{$this->llibre_prestec_estat}</td>
             <td>{$this->data_inici_prestec}</td>
-            <td>{$this->isbn_libre_presctec}</td>
+            <td>{$this->isbn_libre_presctec}</td>";
         
-            <td>
+        if($tipus_usuari=="Bibliotecari" or $tipus_usuari=="Bibliotecari_cap" ){
+            $cadena.="<td>
                 <form action='menus_bibliotecari/afegirmodificar_usuari.php' method='POST'>
                     <input type='hidden' name='metodo' value='PUT'>
                     <input type='hidden' name='nomcognoms' value='{$this->nomcognoms}'>
@@ -53,8 +54,9 @@ class Usuari extends Persona{
                     <input type='hidden' name='id' value='{$this->id}'>
                     <input type='submit' value='Elimina usuari'>
                 </form>
-            </td>
-        </tr>";
-
+            </td>";
+        }
+        $cadena.="</tr>";
+        return $cadena;
     }
 }

@@ -16,7 +16,7 @@ abstract class Persona
     // Método común
     public function nom_de_clase(){
         return get_class($this);
-    } 
+    }
     public function get_id(){
         return $this->id;
     }

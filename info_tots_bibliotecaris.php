@@ -11,7 +11,7 @@ if(!isset($_SESSION["usuari"])){
     exit;
 }
 
-$llibres = "llibres.csv";
+$bibliotecaris_csv = "bibliotecaris.csv";
 //echo session_id();
 //print_r ($_SESSION);
 
@@ -44,13 +44,12 @@ $llibres = "llibres.csv";
 ?>
 
 
-
 <?php 
 
-if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari" || $_SESSION['usuari']->nom_de_clase()=="Bibliotecari_cap") {
-    echo "<p> <form action='/menus_bibliotecari/afegirmodificar_llibre.php' method='POST'>
+if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari_cap"){
+    echo "<p> <form action='/menus_bibliotecari/afegirmodificar_bibliotecari.php' method='POST'>
             <input type='hidden' name='metodo' value='POST'>
-            <input type='submit' value='Afegir llibre' />
+            <input type='submit' value='Afegir bibliotecari' />
             </form>
         </<p>";
 }
@@ -60,19 +59,23 @@ if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari" || $_SESSION['usuari']->n
 
 <table border="2">
     <tr>
-        <th>Titol</th>
-        <th>Autor</th>
-        <th>ISBN</th>
-        <th>Prestec</th>
-        <th>Data de prestec</th>
-        <th>Id de l'usuari</th>
+        <th>Nom de bibliotecari</th>
+        <th>Adreça</th>
+        <th>Correu</th>
+        <th>Telèfon</th>
+        <th>ID</th>
+        <th>Contrasenya</th>
+        <th>Seguretat Social</th>
+        <th>Primer dia</th>
+        <th>Salari</th>
+        <th>Bibliotecari cap?</th>
     </tr>  
     <?php
-        if (($gestor = fopen($llibres, "r")) !== FALSE) {
-            $llibres = array();
+        if (($gestor = fopen($bibliotecaris_csv, "r")) !== FALSE) {
+            $bibliotecari = array();
             while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-                $llibre = new Llibre ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5]);
-                echo $llibre->mostrar_info($_SESSION['usuari']->nom_de_clase());
+                $bibliotecari = new Bibliotecari ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5],$datos[6],$datos[7],$datos[8],$datos[9]);
+                echo $bibliotecari->mostrar_info($_SESSION['usuari']->nom_de_clase());
             }
             fclose($gestor);
         }

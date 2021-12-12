@@ -1,16 +1,47 @@
-<html>
+<?php
 
+include_once '../clases/usuari.php';
+include_once '../clases/bibliotecari.php';
+session_start();
+
+
+if(!isset($_SESSION["usuari"])){
+    header('location:index.html');
+    exit;
+}
+?>
+
+
+<html>
 <head>
     <meta charset="UTF-8">
-    <link rel='stylesheet' type='text/css' media='screen' href='../css/estils.css'>
-    <title>
-        FORMULARI
-    </title>
+	<link rel='stylesheet' type='text/css' media='screen' href='../css/estils.css'>
+	<title>
+		FORMULARI
+	</title>
 </head>
 
 <body>
-    <form action="afegir_editar_eliminar_llibre.php" method="POST">
         <?php
+
+        echo "<div id='sessio'>";
+        echo "<b>Identificador de sessió:</b> " . session_id() . "<br>";
+        echo "<b>Sessió de l'usuari:</b> " . $_SESSION['usuari']->get_id() . "<br>";
+        echo "<b>Nom d'usuari:</b> ". $_SESSION['usuari']->get_name() . "<br>";
+        echo '<div id="icones_sessio">
+        <form action="./logout.php" method="POST">
+            <input type="submit" value="Tanca la sessió">
+        </form>
+        <form action="../info_llibre.php" method="GET">
+            <input type="submit" value="Torna enrere">
+        </form>
+        </div>';
+        echo "</div>";
+        ?>
+
+    <form action="afegir_editar_eliminar_llibre.php" method="POST">
+        <?php 
+        
 
         $usuari = "../usuaris.csv";
 
@@ -36,7 +67,6 @@
        
         <input type='hidden' value='{$metodo}' name='tipus'>
         
-
         <label for='titol'>Títol:</label>
         <input type='text' id='titol' name='titol' {$titol} ><br>
         <label for='autor'>Autor:</label>
@@ -55,12 +85,13 @@
         if (($gestor = fopen('../usuaris.csv', 'r')) !== FALSE) {
             while (($datos = fgetcsv($gestor, 1000, ',')) !== FALSE) {
                 for($i=0;$i<count($datos);$i++){
-                        $estado= $datos[4] == $_POST['idusuari'] ? "selected='selected'" : "";
-                        echo " <option value='$datos[4]' {$estado}>$datos[4]   </option>";
-                        break;
+                        if($datos[8]=="0" or $datos[8]== $_POST["isbn"] ){
+                            $estado= $datos[4] == $_POST['idusuari'] ? "selected='selected'" : "";
+                            echo " <option value='$datos[4]' {$estado}>$datos[4]   </option>";
+                            break;
+                        }
+                        
                     }
-                    
-
             }
             fclose($gestor);
         }

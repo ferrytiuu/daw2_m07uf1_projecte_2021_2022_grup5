@@ -24,32 +24,67 @@ if(!isset($_SESSION["usuari"])){
 <body>
 <?php
     echo "<div id='sessio'>";
-    echo "Identificador de sessió: " . session_id() . "<br>";
-    echo "Sessió de l'usuari: " . $_SESSION['usuari']->get_id() . "<br>";
-    echo  $_SESSION['usuari']->get_name() . "<br>";
+    echo "<b>Identificador de sessió:</b> " . session_id() . "<br>";
+    echo "<b>Sessió de l'usuari:</b> " . $_SESSION['usuari']->get_id() . "<br>";
+    echo "<b>Nom d'usuari:</b> ". $_SESSION['usuari']->get_name() . "<br>";
+    echo '<div id="icones_sessio">
+    <form action="./logout.php" method="POST">
+        <input type="submit" value="Tanca la sessió">
+    </form>
+    <form action="../inici.php" method="GET">
+        <input type="submit" value="Torna enrere">
+    </form>
+    </div>';
     echo "</div>";
-    echo '<div id="boto_esborrar">
-        <form action="./logout.php" method="POST">
-            <input type="hidden" name="nombre">
-            <input type="submit" value="Tanca la sessió">
-        </form>
-        </div>';
 ?>
 
-<form action="../inici.php" method="POST">
-    <input type="submit" value="Torna enrere">
-</form>
+
 <table border="2">
 
 <?php
     switch ($_SESSION['usuari']->nom_de_clase()) {
         case 'Usuari':
-            echo $_SESSION['usuari']->mostrar_info();
-            //var_dump($_COOKIE);
+            echo "<tr>
+            <th>Nom i cognoms</th>
+            <th>Adreça</th>
+            <th>Correu</th>
+            <th>Telèfon</th>
+            <th>ID</th>
+            <th>Contrasenya</th>
+            <th>Estat del llibre prestat</th>
+            <th>Data inici del préstec</th>
+            <th>ISBN del llibre prestat</th>";
+            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
             break;
 
         case 'Bibliotecari':
-            echo $_SESSION['usuari']->mostrar_info();
+            echo "<tr>
+            <th>Nom i cognoms</th>
+            <th>Adreça</th>
+            <th>Correu</th>
+            <th>Telèfon</th>
+            <th>ID</th>
+            <th>Contrasenya</th>
+            <th>Seguretat Social</th>
+            <th>Primer dia</th>
+            <th>Salari</th>
+            <th>Bibliotecari cap?</th>";
+            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            break;
+
+        case 'Bibliotecari_cap':
+            echo "<tr>
+            <th>Nom i cognoms</th>
+            <th>Adreça</th>
+            <th>Correu</th>
+            <th>Telèfon</th>
+            <th>ID</th>
+            <th>Contrasenya</th>
+            <th>Seguretat Social</th>
+            <th>Primer dia</th>
+            <th>Salari</th>
+            <th>Bibliotecari cap?</th>";
+            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
             break;
 
         default:

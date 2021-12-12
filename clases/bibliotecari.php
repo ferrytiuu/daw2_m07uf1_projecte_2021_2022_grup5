@@ -21,24 +21,8 @@ class Bibliotecari extends Persona{
         $this->cap = $cap;
     }
             
-    /*public function nom_de_clase(){
-        return get_class($this);
-    } */
-
-    public function mostrar_info(){
-
-        return "<tr>
-            <th>Nom d'usuari</th>
-            <th>Adreça</th>
-            <th>Correu</th>
-            <th>Telèfon</th>
-            <th>ID</th>
-            <th>Contrasenya</th>
-            <th>Seguretat Social</th>
-            <th>Primer dia</th>
-            <th>Salari</th>
-            <th>És cap?</th>
-        </tr>
+    public function mostrar_info($tipus_usuari){
+        $cadena= "
         <tr>
             <td>{$this->nomcognoms}</td>
             <td>{$this->adreca}</td>
@@ -50,7 +34,39 @@ class Bibliotecari extends Persona{
             <td>{$this->primerdia}</td>
             <td>{$this->salari}</td>
             <td>{$this->cap}</td>
-        </tr>";
+        ";
+
+        if($tipus_usuari=="Bibliotecari_cap"){
+            $cadena.="<td>
+            <form action='menus_bibliotecari/afegirmodificar_bibliotecari.php' method='POST'>
+                <input type='hidden' name='metodo' value='PUT'>
+                <input type='hidden' name='nomcognoms' value='{$this->nomcognoms}'>
+                <input type='hidden' name='adreca' value='{$this->adreca}'>
+                <input type='hidden' name='correu' value='{$this->correu}'>
+                <input type='hidden' name='tel' value='{$this->tel}'>
+                <input type='hidden' name='id' value='{$this->id}'>
+                <input type='hidden' name='password' value='{$this->password}'>
+                <input type='hidden' name='ssocial' value='{$this->ssocial}'>
+                <input type='hidden' name='salari' value='{$this->salari}'>
+                <input type='hidden' name='cap' value='{$this->cap}'>
+                <input type='submit' value='Modifica bibliotecari'>
+            </form>
+            <form action='menus_bibliotecari/afegir_editar_eliminar_usuari.php' method='POST'>
+                <input type='hidden' value='DEL' name='tipus'>
+                <input type='hidden' name='id' value='{$this->id}'>
+                <input type='hidden' name='cap' value='{$this->cap}'>
+                <input type='submit' value='Elimina bibliotecari'>
+            </form>
+        </td>";
+        }
+        $cadena.="</tr>";
+        return $cadena;
+    }
+    public function nom_de_clase(){
+        if($this->cap!=="false"){
+            return  get_class($this) ."_cap";
+        }else{
+            return get_class($this);
+        }
     }
 }
-?>
