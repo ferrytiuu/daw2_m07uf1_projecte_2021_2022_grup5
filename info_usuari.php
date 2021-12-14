@@ -44,7 +44,7 @@ if(!isset($_SESSION["usuari"])){
 <?php
     switch ($_SESSION['usuari']->nom_de_clase()) {
         case 'Usuari':
-            echo "<tr>
+            $taula = "<tr>
             <th>Nom i cognoms</th>
             <th>Adreça</th>
             <th>Correu</th>
@@ -54,11 +54,15 @@ if(!isset($_SESSION["usuari"])){
             <th>Estat del llibre prestat</th>
             <th>Data inici del préstec</th>
             <th>ISBN del llibre prestat</th>";
-            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            $taula.="</tr>";
+            $taula.= $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            echo $taula;
+            $taula_comprimida=base64_encode(gzcompress($taula,9));
+            $tipus = "info_usuari";
             break;
 
         case 'Bibliotecari':
-            echo "<tr>
+            $taula ="<tr>
             <th>Nom i cognoms</th>
             <th>Adreça</th>
             <th>Correu</th>
@@ -69,11 +73,15 @@ if(!isset($_SESSION["usuari"])){
             <th>Primer dia</th>
             <th>Salari</th>
             <th>Bibliotecari cap?</th>";
-            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            $taula.="</tr>";
+            $taula.= $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            echo $taula;
+            $taula_comprimida=base64_encode(gzcompress($taula,9));
+            $tipus = "info_bibliotecari";
             break;
 
         case 'Bibliotecari_cap':
-            echo "<tr>
+            $taula ="<tr>
             <th>Nom i cognoms</th>
             <th>Adreça</th>
             <th>Correu</th>
@@ -84,13 +92,26 @@ if(!isset($_SESSION["usuari"])){
             <th>Primer dia</th>
             <th>Salari</th>
             <th>Bibliotecari cap?</th>";
-            echo $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            $taula.="</tr>";
+            $taula.= $_SESSION['usuari']->mostrar_info($_SESSION['usuari']->nom_de_clase());
+            echo $taula;
+            $taula_comprimida=base64_encode(gzcompress($taula,9));
+            $tipus = "info_bibliotecari_cap";
             break;
 
         default:
 
             break;
     }
+
     ?>
 </table>
+
+<?php
+echo "<form action='../dompdf.php' method='POST'>
+    <input type='hidden' name='tipus' value='{$tipus}'>
+    <input type='hidden' name='codi' value='{$taula_comprimida}'>
+    <input type='submit' value='Imprimeix a PDF'>
+</form>";
+?>
 </body>

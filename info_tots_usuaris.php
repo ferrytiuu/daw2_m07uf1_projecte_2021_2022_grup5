@@ -56,10 +56,10 @@ if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari" || $_SESSION['usuari']->n
 }
 
 
-?>
 
-<table border="2">
-    <tr>
+
+echo'<table border="2">';
+        $taula= "<tr>
         <th>Nom d'usuari</th>
         <th>Adreça</th>
         <th>Correu</th>
@@ -69,17 +69,25 @@ if($_SESSION['usuari']->nom_de_clase()=="Bibliotecari" || $_SESSION['usuari']->n
         <th>Estat del llibre en prestec</th>
         <th>Data inici del prestec</th>
         <th>ISBN del llibre en prestec</th>
-    </tr>  
-    <?php
+        </tr>";
         if (($gestor = fopen($usuaris_csv, "r")) !== FALSE) {
             $usuaris = array();
             while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
                 $usuari = new Usuari ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5],$datos[6],$datos[7],$datos[8],$datos[9]);
-                echo $usuari->mostrar_info($_SESSION['usuari']->nom_de_clase());
+                $taula.= $usuari->mostrar_info($_SESSION['usuari']->nom_de_clase());
+                echo $taula;
+                $taula_comprimida=base64_encode(gzcompress($taula,9));
             }
             fclose($gestor);
         }
         
     ?>
 </table>
+<?php
+echo "<form action='../dompdf.php' method='POST'>
+    <input type='hidden' name='tipus' value='info_tots_usuaris'>
+    <input type='hidden' name='codi' value='{$taula_comprimida}'>
+    <input type='submit' value='Imprimeix a PDF'>
+</form>";
+?>
 </body>

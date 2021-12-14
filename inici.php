@@ -58,6 +58,20 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
         }
         fclose($gestor);
     }
+    if (($gestor = fopen("$bibliotecari", "r")) !== FALSE && $tipus_usuari == "tipus_bibliotecari_cap") {
+        while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+            if ($datos[4] == $_REQUEST['usuari']  && $datos[5] == $_REQUEST['password'] && $datos[9] == 'true') {
+                $id = (string)$_REQUEST['usuari'];
+                //session_name("usuario");
+                session_start();
+                //Print_r ($_SESSION);
+                //$_SESSION["tipus"] = "bibliotecari";
+                $_SESSION["usuari"] = new Bibliotecari($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9]);
+                break;
+            }
+        }
+        fclose($gestor);
+    }
     filter_var_array($_POST, FILTER_SANITIZE_STRING);
 } else {
     session_start(); // always call this at top
