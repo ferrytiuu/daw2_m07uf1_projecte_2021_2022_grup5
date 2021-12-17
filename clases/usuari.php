@@ -20,10 +20,14 @@ class Usuari extends Persona{
         $this->isbn_libre_presctec = $isbn_libre_presctec;
 
     }
-    /*
+    public function __destruct()
+    {
+        error_log("Destructor utilizat sobre Usuari {$this->nomcognoms}", 0);
+    }
+    
     public function nom_de_clase(){
         return get_class($this);
-    }*/
+    }
     public function mostrar_info($tipus_usuari){
         
         $cadena= "<tr>

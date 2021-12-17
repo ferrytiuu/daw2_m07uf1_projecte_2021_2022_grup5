@@ -20,7 +20,12 @@ class Bibliotecari extends Persona{
         $this->salari = $salari;
         $this->cap = $cap;
     }
-            
+    
+    public function __destruct()
+    {
+        error_log("Destructor utilizat sobre Bibliotecari {$this->nomcognoms} eliminat", 0);
+    }
+          
     public function mostrar_info($tipus_usuari){
         $cadena= "
         <tr>

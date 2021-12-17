@@ -73,6 +73,7 @@ echo "<table border='2'>";
                 $llibre = new Llibre ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5]);
                 $taula.= $llibre->mostrar_info($_SESSION['usuari']->nom_de_clase());
                 $taula_comprimida=base64_encode(gzcompress($taula,9));
+                
             }
             fclose($gestor);
             echo $taula;
