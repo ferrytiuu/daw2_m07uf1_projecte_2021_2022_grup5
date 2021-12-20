@@ -75,10 +75,10 @@ echo'<table border="2">';
             while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
                 $usuari = new Usuari ($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5],$datos[6],$datos[7],$datos[8],$datos[9]);
                 $taula.= $usuari->mostrar_info($_SESSION['usuari']->nom_de_clase());
-                echo $taula;
                 $taula_comprimida=base64_encode(gzcompress($taula,9));
             }
             fclose($gestor);
+            echo $taula;
         }
         
     ?>
