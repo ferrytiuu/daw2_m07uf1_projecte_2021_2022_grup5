@@ -1,30 +1,11 @@
 <?php
-/*
-include("./clases/usuari.php");
-include("./clases/bibliotecari.php");
-*/
+
 include_once './clases/usuari.php';
 include_once './clases/bibliotecari.php';
-
 
 $usuari = "usuaris.csv";
 $bibliotecari = "bibliotecaris.csv";
 $tipus_usuari = $_REQUEST["tipus_usuari"];
-//echo "ha muerto";
-//var_dump($POST);
-/*
-if(isset($_REQUEST['submit'])){
-    $test = $_REQUEST['usuari'];
-    echo (string)$_REQUEST['usuari'];
-    echo $_REQUEST['password'];
-  }
-
-if (!empty($_REQUEST['usuari']) || !empty($_REQUEST['password'])) {
-    exit();
-}*/
-//print_r ($_SESSION);
-
-
 
 if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
 
@@ -32,11 +13,7 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
         while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
             if ($datos[4] == $_REQUEST['usuari']  && $datos[5] == $_REQUEST['password']) {
                 $id = (string)$_REQUEST['usuari'];
-                //session_name("usuario");
-
                 session_start();
-                //$_SESSION["tipus"] = "usuari";
-
                 $_SESSION['usuari'] = new Usuari($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8]);
                 break;
             }
@@ -48,10 +25,7 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
         while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
             if ($datos[4] == $_REQUEST['usuari']  && $datos[5] == $_REQUEST['password'] ) {
                 $id = (string)$_REQUEST['usuari'];
-                //session_name("usuario");
                 session_start();
-                //Print_r ($_SESSION);
-                //$_SESSION["tipus"] = "bibliotecari";
                 $_SESSION["usuari"] = new Bibliotecari($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9]);
                 break;
             }
@@ -62,10 +36,7 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
         while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
             if ($datos[4] == $_REQUEST['usuari']  && $datos[5] == $_REQUEST['password'] && $datos[9] == 'true') {
                 $id = (string)$_REQUEST['usuari'];
-                //session_name("usuario");
                 session_start();
-                //Print_r ($_SESSION);
-                //$_SESSION["tipus"] = "bibliotecari";
                 $_SESSION["usuari"] = new Bibliotecari($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9]);
                 break;
             }
@@ -74,14 +45,13 @@ if (isset($_REQUEST["usuari"]) && isset($_REQUEST['password'])) {
     }
     filter_var_array($_POST, FILTER_SANITIZE_STRING);
 } else {
-    session_start(); // always call this at top
+    session_start();
 
     if (!isset($_SESSION["usuari"])) {
         header('location:index.html');
         exit;
     }
 }
-
 
 ?>
 <html>

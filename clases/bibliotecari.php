@@ -9,12 +9,7 @@ class Bibliotecari extends Persona{
     private $cap;
             
     public function __construct($nomcognoms,$adreca,$correu,$tel,$id,$password,$ssocial,$primerdia,$salari,$cap){
-        $this->nomcognoms = $nomcognoms;
-        $this->adreca = $adreca;
-        $this->correu = $correu;
-        $this->tel = $tel;
-        $this->id = $id;
-        $this->password = $password;
+        parent::__construct($nomcognoms,$adreca,$correu,$tel,$id,$password);
         $this->ssocial = $ssocial;
         $this->primerdia = $primerdia;
         $this->salari = $salari;

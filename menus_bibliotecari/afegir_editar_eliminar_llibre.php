@@ -111,10 +111,6 @@ function eliminar_llibre($filename){
             
             if ($datos[0] == $_POST["titol"]) {
                 eliminar_usuari_llibre($datos[2]);
-                //$linia=array($_POST["titol"],$_POST["autor"],$_POST["isbn"],$_POST["prestec"],$_POST["dataprestec"],$_POST["idusuari"]);
-                //array_push($nuevo_csv,$linia);
-                //$datos=array($_POST["titol"],$_POST["autor"],$_POST["isbn"],$_POST["prestec"],$_POST["dataprestec"],$_POST["idusuari"]);
-                //eak;
                 continue;
             }
             array_push($nuevo_csv,$datos);

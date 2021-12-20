@@ -9,12 +9,14 @@ class Usuari extends Persona{
     private $isbn_libre_presctec;
 
     public function __construct($nomcognoms,$adreca,$correu,$tel,$id,$password,$llibre_prestec_estat,$data_inici_prestec,$isbn_libre_presctec){
+        parent::__construct($nomcognoms,$adreca,$correu,$tel,$id,$password);
+        /*
         $this->nomcognoms= $nomcognoms	;
         $this->adreca = $adreca;
         $this->correu = $correu;
         $this->tel = $tel;
         $this->id = $id;
-        $this->password = $password;
+        $this->password = $password;*/
         $this->llibre_prestec_estat = $llibre_prestec_estat;
         $this->data_inici_prestec = $data_inici_prestec;
         $this->isbn_libre_presctec = $isbn_libre_presctec;
